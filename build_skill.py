@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "skills", NAME)
 OUT = os.path.join(ROOT, "dist", NAME + ".skill")
 SKIP_DIRS = {"evals", "__pycache__"}
+TEXT_EXT = (".md", ".py", ".json", ".txt", ".csv")
 
 if not os.path.isfile(os.path.join(SRC, "SKILL.md")):
     raise SystemExit(f"SKILL.md not found in {SRC}")
@@ -26,7 +27,12 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as zf:
             if f.endswith(".pyc"):
                 continue
             path = os.path.join(folder, f)
-            zf.write(path, os.path.join(NAME, os.path.relpath(path, SRC)))
+            arc = os.path.join(NAME, os.path.relpath(path, SRC)).replace(os.sep, "/")
+            if f.endswith(TEXT_EXT):  # same LF line endings whatever git's checkout setting is
+                with open(path, "rb") as fh:
+                    zf.writestr(arc, fh.read().replace(b"\r\n", b"\n"), zipfile.ZIP_DEFLATED)
+            else:
+                zf.write(path, arc)
             count += 1
 
 print(f"Built {os.path.relpath(OUT, ROOT)} ({count} files, {os.path.getsize(OUT):,} bytes)")
