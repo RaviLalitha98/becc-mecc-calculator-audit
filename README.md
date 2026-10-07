@@ -68,8 +68,9 @@ Local-only folders (excluded by `.gitignore`, never committed):
 
 ### 1. Claude.ai or Claude desktop app
 
-1. Download `dist/becc-mecc-calculator-audit.skill` from this repo. Open the file on GitHub and
-   click **Download raw file**. There's no need to clone.
+1. **[Download becc-mecc-calculator-audit.skill](https://github.com/RaviLalitha98/becc-mecc-calculator-audit/raw/main/dist/becc-mecc-calculator-audit.skill)**.
+   There's no need to clone. If the link doesn't download, open
+   [`dist/becc-mecc-calculator-audit.skill`](dist/becc-mecc-calculator-audit.skill) on GitHub and click **Download raw file**.
 2. In Claude, go to **Settings → Capabilities → Skills** and upload the file.
 3. Start a new chat, attach the calculator workbook (`.xlsx`) and ask Claude to audit it.
 
