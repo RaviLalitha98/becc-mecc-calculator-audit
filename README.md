@@ -4,7 +4,7 @@ A Claude skill that checks whether an Excel embodied-carbon calculator gives the
 
 ## What it does
 
-Embodied-carbon calculators, such as a Green Mark BECC (Building Embodied Carbon Calculator) or a
+Embodied-carbon calculators, such as a BECC (Building Embodied Carbon Calculator) or a
 MECC (Material Embodied Carbon Calculator), are large spreadsheets with thousands of formulas.
 A single wrong cell reference, unit mix-up or broken lookup can silently change a building's
 carbon total by orders of magnitude, and it's very hard to spot by eye.
@@ -120,9 +120,9 @@ Commit `.claude/skills/` to that project's repo to share the skill with your tea
 
 Start Claude Code in a folder that contains the workbook, then do either of these:
 
-- Ask in plain words: *"Audit BECC_GMv7_2026_V1.xlsx"* or *"Check this carbon calculator for
+- Ask in plain words: *"Audit BECC_v7_2026_V1.xlsx"* or *"Check this carbon calculator for
   errors"*. Claude loads the skill automatically.
-- Call it directly: `/becc-mecc-calculator-audit BECC_GMv7_2026_V1.xlsx`
+- Call it directly: `/becc-mecc-calculator-audit BECC_v7_2026_V1.xlsx`
 
 To check it's installed, type `/` and look for `becc-mecc-calculator-audit` in the list.
 
