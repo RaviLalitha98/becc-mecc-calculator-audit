@@ -26,6 +26,14 @@ Two habits make or break this kind of audit:
    right. Do not review, question or comment on methodology (system boundary, Module D,
    biogenic carbon, wastage rates, transport assumptions, factor sources and so on), do not
    ask the user methodology questions, and do not raise them as findings.
+   This does **not** exempt unit and conversion errors: a factor declared per m³ multiplied
+   by a quantity in kg, a transport formula treating that same quantity as kg, a kg↔t
+   conversion applied twice, or one label used for two different formulas are calculation
+   errors — the workbook contradicts itself — and must be reported in full. The test: if
+   the finding needs an outside standard to judge, skip it; if the workbook's own units,
+   labels or other rows show it is wrong, report it. A hard-coded conversion constant
+   (e.g. a density) is reported as a maintainability/unit risk; whether its value is right
+   is not judged.
 
 ## Ground rules
 
