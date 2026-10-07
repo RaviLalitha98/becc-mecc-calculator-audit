@@ -32,7 +32,7 @@ blocks); look for the *isolated* ones (one subtotal range shorter than its twin)
 
 1. **Syntax** — text differs? (`=B12*C12` vs `=[@Quantity]*[@EmissionFactor]`)
 2. **Reference structure** — after alignment, same logical source cells / table / column?
-3. **Calculation semantics** — same methodological meaning? This level matters most.
+3. **Calculation semantics** — same calculation meaning? This level matters most.
 
 `VLOOKUP(A2,Factors!A:D,4,FALSE)` and `XLOOKUP(A2,Factors!A:A,Factors!D:D)` are equivalent only
 if: both exact match; not-found handling equivalent (VLOOKUP → #N/A; XLOOKUP → #N/A unless
@@ -48,7 +48,7 @@ unit or geography?
 
 | Class | Evidence |
 |---|---|
-| Expected methodology change | documented in version notes / methodology; consistent across affected rows |
+| Documented intended change | documented in version notes; consistent across affected rows |
 | Expected data update | DATA_CHANGE in EF tables with source/year updated |
 | Formula implementation change | different formula, same semantics proven by tracing or scenario |
 | Compatibility difference | result differs only because of Excel-version behaviour |

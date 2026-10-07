@@ -17,9 +17,23 @@ Two habits make or break this kind of audit:
    reasoned about before it becomes a finding. A pattern break is often a deliberate special
    case; a "clean" pattern can be consistently wrong. Neighbouring formulas are not assumed
    correct.
-2. **Separate kinds of problem.** A spreadsheet defect (wrong cell referenced), a methodology
-   question (should Module D be netted?) and a maintainability risk (fixed `SUM(H10:H150)`)
-   need different owners and different fixes. Mixing them makes the report unusable.
+2. **Separate kinds of problem.** A spreadsheet defect (wrong cell referenced) and a
+   maintainability risk (fixed `SUM(H10:H150)`) need different owners and different fixes.
+   Mixing them makes the report unusable.
+3. **Methodology is out of scope.** The audit checks whether the workbook calculates what it
+   sets out to calculate — judged against its own labels, headers, units, notes and
+   consistency — not whether the carbon-accounting approach or the emission-factor data are
+   right. Do not review, question or comment on methodology (system boundary, Module D,
+   biogenic carbon, wastage rates, transport assumptions, factor sources and so on), do not
+   ask the user methodology questions, and do not raise them as findings.
+   This does **not** exempt unit and conversion errors: a factor declared per m³ multiplied
+   by a quantity in kg, a transport formula treating that same quantity as kg, a kg↔t
+   conversion applied twice, or one label used for two different formulas are calculation
+   errors — the workbook contradicts itself — and must be reported in full. The test: if
+   the finding needs an outside standard to judge, skip it; if the workbook's own units,
+   labels or other rows show it is wrong, report it. A hard-coded conversion constant
+   (e.g. a density) is reported as a maintainability/unit risk; whether its value is right
+   is not judged.
 
 ## Ground rules
 
@@ -34,8 +48,7 @@ Two habits make or break this kind of audit:
   protected and what could not be inspected (see `references/structure-hidden-protection.md`).
 - Every finding carries evidence another reviewer can reproduce: workbook, sheet, cell or
   range, current formula/value, linked sources, expected pattern, why, impact, confidence.
-- Say what is unknown. If methodology documentation is missing, write
-  "Methodology verification requires confirmation." Never state "the calculator is correct".
+- Say what is unknown. Never state "the calculator is correct".
 
 ## Tools
 
@@ -64,9 +77,8 @@ but none should be skipped silently — if one does not apply (no Module D, sing
 say so in the report.
 
 ### Phase 0 — Intake
-Collect: workbook(s) and which is current; stated methodology/standard (e.g. EN 15978,
-ISO 21930, RICS WLCA, Green Mark, client guidance) and any documentation; supported Excel
-versions; authorised passwords; what "BECC" vs "MECC" means for this owner; any known
+Collect: workbook(s) and which is current; any user guide or version notes for the
+workbook; supported Excel versions; authorised passwords; what "BECC" vs "MECC" means for this owner; any known
 problem prompting the audit. Missing items become explicit assumptions, not blockers.
 Hash the original(s): `sha256sum file.xlsx`.
 
@@ -123,7 +135,7 @@ Use `aggregation_check.md`. Verify subtotals reconcile to totals (recompute wher
 check excluded rows, sibling extent mismatches, nested subtotals and hand-picked SUM lists.
 
 ### Phase 9 — Version and twin comparison
-Read `references/version-robustness.md`. Classify each difference (expected methodology
+Read `references/version-robustness.md`. Classify each difference (documented intended
 change, expected data update, implementation change, compatibility difference, probable
 regression, requires investigation). Compare semantics, not text. Rate formula design
 robust / moderately fragile / highly fragile with reasons. Check which application saved
@@ -151,11 +163,9 @@ wrong units, blank selections) are blocked or silently produce zeros. Review hid
 rows/columns/sheets, names, helper cells, macros, queries and protection effects on
 auditability.
 
-### Phase 13 — Methodology review
-Keep methodology questions separate from defects (system boundary, Module D treatment,
-biogenic carbon, carbonation, recycled content, wastage, replacement cycles, transport
-assumptions, grid factors, allocation, declared units, RSL). Where documentation exists,
-compare implementation against it; where not, record the gap under Limitations.
+### Phase 13 — (not performed) Methodology
+Methodology and emission-factor data are out of scope (see principle 3). Skip this phase;
+do not list methodology questions.
 
 ### Phase 14 — Findings, verification and report
 Read `references/severity-confidence-findings.md`. Record findings in `findings.json`
@@ -172,14 +182,14 @@ not survive. Re-hash the original to show it is unchanged.
 ## Classification, severity, confidence (summary)
 
 Each finding gets one **class**: Confirmed error · Probable error requiring review ·
-Unusual but potentially intentional logic · Methodology/design issue · Maintainability
+Unusual but potentially intentional logic · Maintainability
 risk · Version-control/workbook-evolution risk.
 
 **Severity** (impact if real): Critical (materially changes BECC/MECC results) · High
 (significant, subset of results) · Medium (potentially incorrect, needs investigation) ·
 Low (minor/maintainability/presentation) · Observation.
 
-**Confidence** (how sure): Confirmed · High · Medium · Low · Requires methodology confirmation.
+**Confidence** (how sure): Confirmed · High · Medium · Low.
 
 Severity and confidence are independent: an unverified swapped reference in the headline
 total can be Critical/Medium. Never assign severity from unusual syntax alone — assign it

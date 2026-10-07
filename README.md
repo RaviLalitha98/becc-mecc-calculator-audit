@@ -27,8 +27,8 @@ the impact, a suggested fix, and a severity (Critical / High / Medium / Low).
 **What you get:** an evaluation report (shown in the chat, or as a Word or PDF file, your
 choice), a findings register (Excel + Markdown), and an evidence folder with the raw scan results. The original workbook is never modified.
 
-**What it doesn't do:** it doesn't confirm that the emission factors or the methodology are
-right. Those are flagged for the methodology owner to confirm.
+**What it doesn't do:** it doesn't review the methodology or verify the emission-factor data.
+Those are outside its scope, and it doesn't raise questions about them.
 
 ## Repository layout
 
