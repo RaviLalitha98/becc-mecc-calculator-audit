@@ -1,0 +1,18 @@
+{
+  "skill_name": "becc-mecc-calculator-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "This is the Green Mark BECC calculator we're about to circulate to project teams (GMv7 2026 V1). Can you do a proper technical audit of it before it goes out? I need to know whether the formulas, links, material/emission-factor mappings, A1-A5 calcs, units and totals are actually reliable, and whether it'll work for people on older Excel. Give me a report I can take to the methodology owner, plus a findings list.",
+      "expected_output": "Evidence-backed audit report + findings register separating confirmed/probable defects, intentional logic, methodology questions, maintainability and version risks. Expected leads: A1-A3 and A4 module totals (AN605/AS605) with shorter row extents than sibling totals; swapped references in Project Details intensity rows (B84/B85, B126/B127); truncated MaritimeTrans lookup range; silent zero for unlisted unit text; dead external link and broken Building_Type names; CONCAT/UNIQUE/FILTER requiring Excel 2019/2021+; negative timber factors as a methodology question.",
+      "files": ["inputs/BECC_GMv7_2026_V1.xlsx"]
+    },
+    {
+      "id": 2,
+      "prompt": "We got a v8 of the BECC calculator back from the consultant (BECC_GMv8_2026_test.xlsx). The only thing they told us is that they 'updated a few factors'. Compare it against our GMv7 V1 and tell me what actually changed, whether any of it looks like a regression or accidental damage, and what that does to results.",
+      "expected_output": "Finds and classifies: Super structure!N285 formula overwritten by 0; Super structure!M120 row-shifted reference (H121); Data_Aluminium!E3 9.08→12.5 (data update requiring source verification); Results Tables!C4 A4 total now reading the A1-A3 total AN605 (critical cross-module link). Separates save damage from openpyxl (lost cross-sheet data validations, charts, spill metadata, cached values) from content changes. Quantifies effects with scenarios.",
+      "files": ["inputs/BECC_GMv7_2026_V1.xlsx", "inputs/BECC_GMv8_2026_test.xlsx"],
+      "notes": "Build the v8 test file from v7 with openpyxl: N285=0; M120='=IF(H121=\"\",F120,H120)'; Data_Aluminium!E3=12.5; 'Results Tables'!C4=\"='Super structure'!AN605\"."
+    }
+  ]
+}

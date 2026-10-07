@@ -1,0 +1,39 @@
+{
+  "_comment": "Replace sheet/cell references with the calculator's real input and output cells. Inputs: numbers, text, booleans or null. Pick text values from the dropdown source lists so Excel would accept them. Expectation forms: value+tol, same_as, equals_product_of, is_error.",
+  "scenarios": [
+    {
+      "name": "T1 single material",
+      "description": "1,000 kg of one material with a known A1-A3 factor; checks row result, block sum, module total and summary pick-up.",
+      "inputs": {"Calc!C28": "<material from dropdown>", "Calc!E28": "<country/variant>", "Calc!I28": 1000, "Calc!J28": "kg"},
+      "outputs": ["Calc!F28", "Calc!M28", "Calc!N28", "Calc!AN605", "Results!C3"],
+      "expect": {
+        "Calc!N28": {"equals_product_of": ["Calc!I28", "Calc!M28"], "tol": 1e-9},
+        "Results!C3": {"same_as": "Calc!N28"}
+      }
+    },
+    {
+      "name": "T3 transport A4",
+      "description": "Known mass, distance and vehicle; A4 should equal mass x km x factor in consistent units (watch kg vs t).",
+      "inputs": {"Calc!I28": 1000, "Calc!J28": "kg", "Calc!AA28": "<vehicle>", "Calc!AB28": 100},
+      "outputs": ["Calc!AD28", "Calc!AS605", "Results!C4"]
+    },
+    {
+      "name": "T7 missing emission factor",
+      "description": "Material/country combination with no record: warning, fallback, or silent zero?",
+      "inputs": {"Calc!C28": "<material>", "Calc!E28": "<country with no record>", "Calc!I28": 1000, "Calc!J28": "kg"},
+      "outputs": ["Calc!F28", "Calc!G28", "Calc!N28"]
+    },
+    {
+      "name": "T8 invalid values",
+      "description": "Negative quantity and an unlisted unit text.",
+      "inputs": {"Calc!I28": -5, "Calc!J28": "tonnes"},
+      "outputs": ["Calc!K28", "Calc!N28", "Results!C3"]
+    },
+    {
+      "name": "T2b last block row reaches every total",
+      "description": "Quantity in the last row of the last block: every module total and summary should move.",
+      "inputs": {"Calc!I590": 1000, "Calc!J590": "kg"},
+      "outputs": ["Calc!N590", "Calc!AN605", "Calc!AS605", "Calc!BS605", "Results!C3"]
+    }
+  ]
+}

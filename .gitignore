@@ -1,0 +1,23 @@
+# Workbooks and audit results stay local — they may be confidential
+input/
+output/
+
+# Safety net: never commit spreadsheets or reports from anywhere in the repo
+*.xlsx
+*.xlsm
+*.xls
+*.pdf
+~$*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
