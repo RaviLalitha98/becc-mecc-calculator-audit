@@ -41,6 +41,7 @@ right. Those are flagged for the methodology owner to confirm.
 │       ├── references/               Guidance notes the skill reads (units, modules, testing, …)
 │       ├── assets/                   Report and test-scenario templates
 │       └── evals/                    Test prompts for evaluating the skill
+├── build_skill.py                    Rebuilds the package in dist/
 └── dist/
     └── becc-mecc-calculator-audit.skill   Packaged skill, ready to install
 ```
@@ -141,12 +142,38 @@ Add `--previous input/OLD_VERSION.xlsx` to compare against an earlier version. T
 the workbook only and never modify it. Their output is *candidate* evidence: each item still has
 to be traced and confirmed before it becomes a finding (see `SKILL.md`).
 
-## Rebuilding the package
+## Editing the skill
 
-After editing files in `skills/becc-mecc-calculator-audit/`, rebuild `dist/becc-mecc-calculator-audit.skill`
-(a zip whose top-level folder is `becc-mecc-calculator-audit/`):
+Anyone can refine the skill: improve the audit method, add a check or fix a script.
 
-```bash
-python -c "import shutil; shutil.make_archive('dist/becc-mecc-calculator-audit', 'zip', 'skills', 'becc-mecc-calculator-audit')" \
-  && mv dist/becc-mecc-calculator-audit.zip dist/becc-mecc-calculator-audit.skill
-```
+1. **Edit the source files** in `skills/becc-mecc-calculator-audit/`:
+
+   | To change… | Edit |
+   |---|---|
+   | The audit steps Claude follows | `SKILL.md` |
+   | Guidance on units, life-cycle modules, severity, etc. | `references/*.md` |
+   | The automated checks | `scripts/*.py` |
+   | The report layout or test scenarios | `assets/` |
+
+   Don't edit `dist/becc-mecc-calculator-audit.skill` directly. It's a generated zip file.
+
+2. **Test script changes** (if you changed any) on a sample workbook:
+   ```bash
+   python skills/becc-mecc-calculator-audit/scripts/run_all.py input/WORKBOOK.xlsx --out output/test
+   ```
+
+3. **Rebuild the package** so the downloadable file includes your changes:
+   ```bash
+   python build_skill.py
+   ```
+   This works on Windows, macOS and Linux. It leaves out `evals/` and Python cache files.
+
+4. **Commit and push** both the source changes and the rebuilt package:
+   ```bash
+   git add -A
+   git commit -m "Describe what you changed"
+   git push
+   ```
+
+If you skip step 3, people who download the `.skill` file get the old version. Claude Code
+users who copy the `skills/` folder get your changes either way.
