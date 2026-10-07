@@ -15,7 +15,7 @@
 - **Overall structure:** [one-paragraph calculation flow]
 - **Issues by severity:** Critical [n] · High [n] · Medium [n] · Low [n] · Observation [n] (by class: confirmed errors [n], probable errors [n], intentional-but-unusual [n], methodology [n], maintainability [n], version/evolution [n])
 - **Major calculation risks:** [top 3–5, one line each with finding IDs]
-- **Major methodology risks:** [top items with question IDs]
+- **Major methodology risks:** [top items, one line each]
 - **Version-robustness concerns:** [fragility rating and the main break scenarios]
 - **Excel compatibility:** [minimum version implied; main incompatibilities]
 - **Overall assessment:** [evidence-based statement of reliability and the conditions attached — never "the calculator is correct"]
@@ -91,14 +91,7 @@
 
 [Engine used and caveats]
 
-## 15. Methodology questions (for the methodology owner)
-
-| ID | Question | Why it matters | Where in workbook | Evidence/assumption observed |
-|---|---|---|---|---|
-
-(Not defects — decisions that need confirmation.)
-
-## 16. Recommended corrections
+## 15. Recommended corrections
 
 ### [Finding ID] — [title]
 **Current formula** `…`
@@ -108,7 +101,7 @@
 
 (Recommendations only; the workbook was not modified.)
 
-## 17. Limitations and reproducibility
+## 16. Limitations and reproducibility
 
 [What could not be verified; assumptions; evidence folder contents; how to reproduce; original file hash unchanged at end]
 

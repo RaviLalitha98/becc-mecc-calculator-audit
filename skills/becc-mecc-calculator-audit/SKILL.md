@@ -155,7 +155,7 @@ auditability.
 Keep methodology questions separate from defects (system boundary, Module D treatment,
 biogenic carbon, carbonation, recycled content, wastage, replacement cycles, transport
 assumptions, grid factors, allocation, declared units, RSL). Where documentation exists,
-compare implementation against it; where not, list questions for the methodology owner.
+compare implementation against it; where not, record the gap under Limitations.
 
 ### Phase 14 — Findings, verification and report
 Read `references/severity-confidence-findings.md`. Record findings in `findings.json`
@@ -189,7 +189,7 @@ from what the cell feeds. Full definitions and examples: `references/severity-co
 
 1. **Evaluation report** following `assets/report_template.md` (executive summary, findings
    table, formula consistency, cell linkage, life-cycle modules, materials, units, version
-   robustness, compatibility matrix and conclusion, methodology questions, recommended
+   robustness, compatibility matrix and conclusion, recommended
    corrections with current/proposed formula and reason, test results, limitations).
    Always write it first as Markdown (`audit_report.md`), then deliver it in the format the
    user wants. If they have not said, ask once, before writing the report, offering:
