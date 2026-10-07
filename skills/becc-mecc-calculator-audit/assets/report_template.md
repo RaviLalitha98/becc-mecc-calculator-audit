@@ -111,3 +111,24 @@
 ## 17. Limitations and reproducibility
 
 [What could not be verified; assumptions; evidence folder contents; how to reproduce; original file hash unchanged at end]
+
+**Outside the scope of this evaluation (Excel side).** Besides methodology and emission-factor
+data, which are not verified, the following were not fully covered. Keep every item; say which
+ones apply to this workbook (e.g. "no VBA present") and add anything else not reviewed.
+
+- **Live Excel behaviour:** the review reads formulas and the values Excel last saved; scenario
+  tests were recalculated in [LibreOffice / Excel version]. Behaviour that appears only when
+  Excel itself recalculates is not covered unless tested by hand in Excel.
+- **Other Excel versions and platforms:** compatibility with Excel 2016/2019/2021 is assessed
+  from the functions used, not by opening the file in each version. Excel for Mac, the web and
+  mobile were not tested.
+- **Macros, Power Query and data connections:** detected but not executed or fully reviewed;
+  locked VBA projects and encrypted parts without a password cannot be inspected. [present / not present]
+- **Run-time references** (INDIRECT, OFFSET, text-built references): only partly traceable statically.
+- **External linked files:** links are reported, but the linked workbooks themselves are not reviewed.
+- **Presentation and usability:** charts are checked only against the totals they display;
+  conditional formatting, number formats, print layout, user experience and accessibility are not reviewed.
+- **Performance and file health:** recalculation speed, file size and stability are not assessed.
+- **Applying corrections:** fixes are recommended, not applied; their effect needs re-testing after implementation.
+- **Untested inputs:** only the scenarios listed in section 14 were run; other combinations of
+  materials, countries and entries may reveal further issues.

@@ -28,6 +28,16 @@ INLINE = re.compile(r"(\*\*[^*]+\*\*|`[^`]+`|\*[^*\s][^*]*\*)")
 TABLE_SEP = re.compile(r"^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?$")
 
 
+CODE = re.compile(r"(```.*?```|`[^`\n]+`)", re.S)
+FORMULA_STAR = re.compile(r"(?<=[\w)\]\"'])\*(?=[\w(\[\"'$])")
+
+
+def protect_formula_stars(md: str) -> str:
+    """Escape '*' used as multiplication (=I*M*K) so it is not read as italics; code is left alone."""
+    return "".join(part if i % 2 else FORMULA_STAR.sub(r"\\*", part)
+                   for i, part in enumerate(CODE.split(md)))
+
+
 def split_row(line: str) -> list[str]:
     line = line.strip()
     if line.startswith("|"):
@@ -39,10 +49,11 @@ def split_row(line: str) -> list[str]:
 
 def add_inline(par, text: str):
     """Add text to a python-docx paragraph, honouring **bold**, *italic* and `code`."""
-    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r"\1 (\2)", text)
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r"\1 (\2)", text).replace("\\*", "\x00")
     for part in INLINE.split(text):
         if not part:
             continue
+        part = part.replace("\x00", "*")
         if part.startswith("**") and part.endswith("**"):
             par.add_run(part[2:-2]).bold = True
         elif part.startswith("`") and part.endswith("`"):
@@ -68,7 +79,7 @@ def to_docx(md: str, path: str):
     doc.styles["Normal"].font.name = "Calibri"
     doc.styles["Normal"].font.size = Pt(10)
 
-    lines = md.splitlines()
+    lines = protect_formula_stars(md).splitlines()
     i = 0
     while i < len(lines):
         line = lines[i].rstrip()
@@ -190,11 +201,34 @@ def register_font() -> str:
     return ""
 
 
+def size_columns(html: str) -> str:
+    """Give each table column a width in proportion to its text, so long text columns are not squeezed."""
+    def one(m):
+        table = m.group(0)
+        rows = [re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r, re.S) for r in re.findall(r"<tr>(.*?)</tr>", table, re.S)]
+        ncol = max((len(r) for r in rows), default=0)
+        if ncol < 2:
+            return table
+        lengths = [0.0] * ncol
+        for row in rows:
+            for j, c in enumerate(row[:ncol]):
+                lengths[j] += len(re.sub(r"<[^>]+>", "", c))
+        header = [len(re.sub(r"<[^>]+>", "", c)) for c in rows[0]] + [0] * ncol
+        weights = [min(max(x / len(rows), header[j] + 2, 6), 80) for j, x in enumerate(lengths)]
+        widths = iter(f"{100 * w / sum(weights):.0f}%" for w in weights)
+        return re.sub(r"<th(?=[\s>])([^>]*)>", lambda h: f'<th{h.group(1)} width="{next(widths, "")}">', table)
+    return re.sub(r"<table>.*?</table>", one, html, flags=re.S)
+
+
 def to_pdf(md: str, path: str):
     import markdown
     from xhtml2pdf import pisa
 
-    body = markdown.markdown(md, extensions=["tables", "fenced_code", "sane_lists"])
+    body = markdown.markdown(protect_formula_stars(md), extensions=["tables", "fenced_code", "sane_lists"])
+    body = size_columns(body)
+    # Long formulas have no spaces to wrap at and would run off the page; the PDF engine only
+    # breaks at real spaces, so add one after argument commas (Excel ignores these spaces).
+    body = re.sub(r"[^\s<>]{60,}", lambda m: re.sub(r",(?=\S)", ", ", m.group(0)), body)
     css = PDF_CSS + register_font()
     html = f"<html><head><meta charset='utf-8'><style>{css}</style></head><body>{body}</body></html>"
     with open(path, "wb") as fh:
