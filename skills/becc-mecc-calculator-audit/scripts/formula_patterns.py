@@ -253,7 +253,7 @@ def main():
          "Candidates only. `likely-defect` = isolated break whose only difference is a shifted/other-sheet reference "
          "(or a swapped pair); `robustness` = same cells, different $-anchoring; `intentional-or-defect` = different "
          "formula structure (often a deliberate special case, sometimes an overwrite). Verify each against row labels "
-         "and headers — the majority pattern can itself be wrong.\n"]
+         "and methodology — the majority pattern can itself be wrong.\n"]
     cnt = Counter((h["sheet"], h["triage_hint"]) for h in rows_out)
     L.append("| Sheet | Triage | Count |\n|---|---|---|")
     for (s, t), n in sorted(cnt.items()):

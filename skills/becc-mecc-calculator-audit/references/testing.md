@@ -43,7 +43,7 @@ errors, silently substitutes a value, or misleads.
 
 From `inventory.json` (`sheets[].validations`): list each input region with its rule type,
 bounds, list source, allowBlank and error style (only *stop* blocks entry; validation never
-blocks paste). Then answer: can a user enter a physically invalid value
+blocks paste). Then answer: can a user enter a physically or methodologically invalid value
 (negative mass, unit not in the conversion logic, waste > 100%, text in a number field) without
 any warning, and what does the calculator do with it?
 

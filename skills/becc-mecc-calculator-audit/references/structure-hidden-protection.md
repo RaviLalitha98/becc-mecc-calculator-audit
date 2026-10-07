@@ -46,7 +46,7 @@ Flag:
 - Hidden and veryHidden sheets — veryHidden can only be unhidden via VBA; note them explicitly.
 - Hidden rows/columns inside calculation regions (inventory counts; check whether totals include them).
 - Defined names: workbook vs sheet scope, hidden names, names to `#REF!`, names to external books, dynamic names (OFFSET/INDIRECT).
-- Helper cells with flags or switches that change calculation logic (e.g. "if project-level A5 entered, ignore element A5").
+- Helper cells with flags or switches that change methodology (e.g. "if project-level A5 entered, ignore element A5").
 - Data-validation sources — dropdown lists derived from formulas (UNIQUE/FILTER) behave differently in older Excel.
 - Conditional formatting that hides values (white font, custom number formats `;;;`).
 - Comments/notes holding assumptions.

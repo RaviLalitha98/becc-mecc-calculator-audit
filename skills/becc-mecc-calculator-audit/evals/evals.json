@@ -3,8 +3,8 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "This is the Green Mark BECC calculator we're about to circulate to project teams (GMv7 2026 V1). Can you do a proper technical audit of it before it goes out? I need to know whether the formulas, links, material/emission-factor mappings, A1-A5 calcs, units and totals are actually reliable, and whether it'll work for people on older Excel. Give me a report I can share with the team, plus a findings list.",
-      "expected_output": "Evidence-backed audit report + findings register separating confirmed/probable defects, intentional logic, maintainability and version risks. Expected leads: A1-A3 and A4 module totals (AN605/AS605) with shorter row extents than sibling totals; swapped references in Project Details intensity rows (B84/B85, B126/B127); truncated MaritimeTrans lookup range; silent zero for unlisted unit text; dead external link and broken Building_Type names; CONCAT/UNIQUE/FILTER requiring Excel 2019/2021+. No methodology questions or methodology findings.",
+      "prompt": "This is the Green Mark BECC calculator we're about to circulate to project teams (GMv7 2026 V1). Can you do a proper technical audit of it before it goes out? I need to know whether the formulas, links, material/emission-factor mappings, A1-A5 calcs, units and totals are actually reliable, and whether it'll work for people on older Excel. Give me a report I can take to the methodology owner, plus a findings list.",
+      "expected_output": "Evidence-backed audit report + findings register separating confirmed/probable defects, intentional logic, methodology questions, maintainability and version risks. Expected leads: A1-A3 and A4 module totals (AN605/AS605) with shorter row extents than sibling totals; swapped references in Project Details intensity rows (B84/B85, B126/B127); truncated MaritimeTrans lookup range; silent zero for unlisted unit text; dead external link and broken Building_Type names; CONCAT/UNIQUE/FILTER requiring Excel 2019/2021+; negative timber factors as a methodology question.",
       "files": ["inputs/BECC_GMv7_2026_V1.xlsx"]
     },
     {

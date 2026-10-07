@@ -83,7 +83,7 @@ For each material category write the expected chain, e.g.
 `qty × K × distance × vehicle EF = A4`. Then check, using `pattern_map.csv`, that every block
 for that material uses the same chain, and that comparable materials (precast vs in-situ
 concrete, rebar vs section steel) treat density, waste, transport, recycling, stage factors
-and unit conversions consistently. Differences need a documented reason.
+and unit conversions consistently. Differences need a methodological reason.
 
 ## Evidence record for each finding (stage 17)
 

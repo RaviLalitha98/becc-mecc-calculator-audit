@@ -18,9 +18,9 @@ import sys
 from collections import Counter
 
 SEVERITIES = ["Critical", "High", "Medium", "Low", "Observation"]
-CONFIDENCES = ["Confirmed", "High", "Medium", "Low"]
+CONFIDENCES = ["Confirmed", "High", "Medium", "Low", "Requires methodology confirmation"]
 CLASSES = ["Confirmed error", "Probable error requiring review", "Unusual but potentially intentional logic",
-           "Maintainability risk", "Version-control / workbook-evolution risk"]
+           "Methodology/design issue", "Maintainability risk", "Version-control / workbook-evolution risk"]
 REQUIRED = ["id", "title", "class", "severity", "confidence", "sheet", "range", "category",
             "current_logic", "issue", "impact", "recommendation"]
 COLUMNS = ["id", "severity", "confidence", "class", "category", "lifecycle_module", "material", "workbook", "sheet",
@@ -46,7 +46,7 @@ def main():
             errs.append(f"{f.get('id')}: confidence {f.get('confidence')!r} not in {CONFIDENCES}")
         if f.get("class") not in CLASSES:
             errs.append(f"{f.get('id')}: class {f.get('class')!r} not in {CLASSES}")
-        if f.get("class") == "Confirmed error" and f.get("confidence") == "Low":
+        if f.get("class") == "Confirmed error" and f.get("confidence") in ("Low", "Requires methodology confirmation"):
             errs.append(f"{f.get('id')}: 'Confirmed error' with confidence {f.get('confidence')} is contradictory")
     for k, n in Counter(f.get("id") for f in data).items():
         if n > 1:

@@ -295,7 +295,7 @@ def main():
         Lm.append("\n## Fallback chains (IFERROR to a second lookup)\n")
         for (sh, p), n in fallback_patterns.most_common(20):
             Lm.append(f"- {sh}: {p} ×{n} — a missing specific factor silently falls back to a generic one; "
-                      "confirm this is intended and visible to users")
+                      "confirm this is documented methodology and visible to users")
     Lm.append("\n## Lookups with issues\n")
     for r in [r for r in rows if r["issues"] and r["issues"] != "RANGE_EXTENT_VARIES"][:150]:
         Lm.append(f"- **{r['function']}** `{r['range']}` col/ret `{r['col_or_return']}` ({r['match_mode']}) → "
