@@ -1,4 +1,4 @@
-# Life-cycle module audit and methodology review (stages 6, 16)
+# Life-cycle module audit (stage 6)
 
 Module definitions follow EN 15978 / EN 15804 / ISO 21930 conventions. A calculator may cover
 only some modules — report coverage explicitly ("A1–A5 only; B, C, D not modelled").
@@ -13,7 +13,7 @@ only some modules — report coverage explicitly ("A1–A5 only; B, C, D not mod
 | C2 transport | mass × distance × factor | end-of-life mass | | reuse of A4 distance without justification |
 | C3 waste processing | mass to recycling/recovery × factor | | | recycled share inconsistent with D |
 | C4 disposal | mass to landfill × factor | | | landfill + recycling shares ≠ 100% |
-| D beyond boundary | net flow × substitution factor | recovered − recycled input | credit factor | credit for recycled content already credited in A1–A3; D netted into the headline total when the methodology reports it separately |
+| D beyond boundary | net flow × substitution factor | recovered − recycled input | credit factor | credit for recycled content already credited in A1–A3; D netted into the headline total when the workbook labels report it separately |
 
 ## Checks for every module present
 
@@ -33,15 +33,9 @@ only some modules — report coverage explicitly ("A1–A5 only; B, C, D not mod
 - Project-level A5 entered while element-level A5 still sums into some totals.
 - Summary totals built from both detail rows and subtotals (`NESTED_SUBTOTAL`).
 
-## Methodology questions (keep separate from defects)
+## Out of scope
 
-System boundary; Module D treatment; biogenic carbon (−1/+1, storage claims); carbonation of
-concrete; recycled content and recycling credits (cut-off vs substitution); construction
-wastage rates and their source; replacement cycles and reference service life; transport
-assumptions and default distances; grid electricity factors and their year; allocation rules;
-declared vs functional units; normalisation area (GFA vs CFA vs NLA vs sub-structure area);
-reporting period; which statistic (median, mean, percentile) represents generic factors.
-
-Where documentation exists, compare implementation with it and cite both. Where not, write:
-"Methodology verification requires confirmation." Never silently impose an assumption — state
-it and its effect.
+Whether the modules are defined or treated correctly as a matter of method (system
+boundary, Module D, biogenic carbon, wastage rates, service life, transport defaults and so
+on) is not reviewed. Check only that each module is calculated and linked the way the
+workbook's own labels and structure say it is. Do not raise methodology questions.

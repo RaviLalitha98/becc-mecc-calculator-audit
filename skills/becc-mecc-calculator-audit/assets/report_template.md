@@ -2,7 +2,6 @@
 
 - **Workbook(s) reviewed:** [file name(s), version, SHA-256 at intake]
 - **Compared against:** [previous version / twin sheets / none]
-- **Methodology reference:** [document + version, or "not provided — methodology verification requires confirmation"]
 - **Supported Excel versions (stated):** [list, or "not documented — to confirm"]
 - **Review date / reviewer:** [ ]
 - **Scope and limits:** [what was and was not reviewed: protected/encrypted parts, VBA, Power Query, Excel vs LibreOffice recalculation, inputs used]
@@ -13,9 +12,8 @@
 
 - **What the calculator is:** [purpose, BECC/MECC scope, modules covered, materials covered, sheet count, formula count]
 - **Overall structure:** [one-paragraph calculation flow]
-- **Issues by severity:** Critical [n] · High [n] · Medium [n] · Low [n] · Observation [n] (by class: confirmed errors [n], probable errors [n], intentional-but-unusual [n], methodology [n], maintainability [n], version/evolution [n])
+- **Issues by severity:** Critical [n] · High [n] · Medium [n] · Low [n] · Observation [n] (by class: confirmed errors [n], probable errors [n], intentional-but-unusual [n], maintainability [n], version/evolution [n])
 - **Major calculation risks:** [top 3–5, one line each with finding IDs]
-- **Major methodology risks:** [top items with question IDs]
 - **Version-robustness concerns:** [fragility rating and the main break scenarios]
 - **Excel compatibility:** [minimum version implied; main incompatibilities]
 - **Overall assessment:** [evidence-based statement of reliability and the conditions attached — never "the calculator is correct"]
@@ -58,7 +56,7 @@
 
 ## 8. Emission-factor database review
 
-[Table profiles; duplicates; units; geography; source/year/version; boundaries; negatives/zeros/outliers — "requires source verification" where unproven]
+[Internal consistency only — factor values and sources are not verified: table profiles; duplicate keys; units inconsistent with the table; blanks/zeros that silently return nothing; values the lookups cannot reach; outliers by orders of magnitude within the same table]
 
 ## 9. Unit and conversion findings
 
@@ -71,7 +69,7 @@
 ## 11. Version robustness findings
 
 [What breaks when materials/rows/modules/columns/sheets are added or renamed; fragility per area (robust / moderately fragile / highly fragile) with reasons]
-[Cross-version / twin comparison: each difference classified as expected methodology change / expected data update / implementation change / compatibility difference / probable regression / requires investigation]
+[Cross-version / twin comparison: each difference classified as documented intended change / expected data update / implementation change / compatibility difference / probable regression / requires investigation]
 
 ## 12. Excel version compatibility
 
@@ -91,14 +89,7 @@
 
 [Engine used and caveats]
 
-## 15. Methodology questions (for the methodology owner)
-
-| ID | Question | Why it matters | Where in workbook | Evidence/assumption observed |
-|---|---|---|---|---|
-
-(Not defects — decisions that need confirmation.)
-
-## 16. Recommended corrections
+## 15. Recommended corrections
 
 ### [Finding ID] — [title]
 **Current formula** `…`
@@ -108,12 +99,12 @@
 
 (Recommendations only; the workbook was not modified.)
 
-## 17. Limitations and reproducibility
+## 16. Limitations and reproducibility
 
 [What could not be verified; assumptions; evidence folder contents; how to reproduce; original file hash unchanged at end]
 
-**Outside the scope of this evaluation (Excel side).** Besides methodology and emission-factor
-data, which are not verified, the following were not fully covered. Keep every item; say which
+**Outside the scope of this evaluation.** Methodology and emission-factor data are not
+reviewed. On the Excel side, the following were not fully covered. Keep every item; say which
 ones apply to this workbook (e.g. "no VBA present") and add anything else not reviewed.
 
 - **Live Excel behaviour:** the review reads formulas and the values Excel last saved; scenario

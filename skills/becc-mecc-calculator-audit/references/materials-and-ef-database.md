@@ -49,8 +49,9 @@ detection is keyword-based (a "Type" column may hold "Country/Global", not a sou
 | Outliers | values >50× the column median, or a factor-of-1000 jump (kg vs t) |
 | Age | old datasets for fast-changing materials (aluminium, steel, grid electricity) |
 
-Do not label an EF incorrect without evidence. Use "Requires source verification" and say
-which document would settle it. Negative A1–A3 values for timber are a methodology question
-(EN 15804+A2 / ISO 21930 report −1 in A1–A3 and +1 at end of life); if the calculator has no
-C-stage, carrying the negative alone understates whole-life carbon — record it as a methodology
-issue unless the documentation says otherwise.
+Emission-factor values and their sources are not verified. Report a factor only when the
+workbook handles it inconsistently with itself — wrong unit for its table, a 1000× jump
+against the same table, a blank or zero that silently returns nothing, a value the lookup
+cannot reach. Do not judge whether a factor or a sign convention (e.g. negative timber
+A1–A3) is right; check only that the workbook carries such values through consistently
+(totals, charts, rankings).

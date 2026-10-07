@@ -4,10 +4,9 @@
 
 | Class | Use when |
 |---|---|
-| Confirmed error | evidence shows the cell computes something other than what its label/methodology says, ideally demonstrated numerically |
+| Confirmed error | evidence shows the cell computes something other than what its label, header or unit says, ideally demonstrated numerically |
 | Probable error requiring review | strong evidence (isolated pattern break pointing at a differently-labelled row) but intent not provable from the file |
 | Unusual but potentially intentional logic | deviates from pattern but plausibly deliberate (special case, override, boundary row) |
-| Methodology/design issue | the spreadsheet does what it was built to do, but the approach is questionable or undocumented |
 | Maintainability risk | correct today, likely to break with growth/edits (fixed ranges, hand-picked SUMs, hard-coded indexes) |
 | Version-control / workbook-evolution risk | differences between versions or twins, dead links, legacy sheets, inconsistent protection, save damage |
 
@@ -29,8 +28,7 @@ concrete line. Never from syntax alone.
 
 ## Confidence (how sure)
 
-Confirmed (demonstrated by recalculation or unambiguous evidence) · High · Medium · Low ·
-Requires methodology confirmation.
+Confirmed (demonstrated by recalculation or unambiguous evidence) · High · Medium · Low.
 
 ## findings.json schema
 
@@ -69,8 +67,7 @@ counts for the executive summary.
 
 Preferred categories: Structure, Formula pattern, Hard-coded value, Reference/linkage,
 Error/masking, Lookup/mapping, EF database, Life-cycle module, Units, Aggregation, Data
-validation, Hidden logic, Protection, Version robustness, Excel compatibility, External link,
-Methodology.
+validation, Hidden logic, Protection, Version robustness, Excel compatibility, External link.
 
 ## Writing a finding
 
