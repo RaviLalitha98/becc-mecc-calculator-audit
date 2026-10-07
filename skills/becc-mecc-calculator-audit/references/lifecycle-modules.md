@@ -1,7 +1,8 @@
 # Life-cycle module audit (stage 6)
 
 Module definitions follow EN 15978 / EN 15804 / ISO 21930 conventions. A calculator may cover
-only some modules — report coverage explicitly ("A1–A5 only; B, C, D not modelled").
+only some modules — report coverage explicitly ("A1–A5 only; B, C, D not modelled"). Check that
+each module is calculated and linked the way the workbook's own labels and structure say it is.
 
 | Module | Typical formula | Quantity | Factor | Common faults |
 |---|---|---|---|---|
@@ -32,10 +33,3 @@ only some modules — report coverage explicitly ("A1–A5 only; B, C, D not mod
 - Construction waste in A5 *and* in the C-stage quantity (or an inflated quantity *and* A5 waste).
 - Project-level A5 entered while element-level A5 still sums into some totals.
 - Summary totals built from both detail rows and subtotals (`NESTED_SUBTOTAL`).
-
-## Out of scope
-
-Whether the modules are defined or treated correctly as a matter of method (system
-boundary, Module D, biogenic carbon, wastage rates, service life, transport defaults and so
-on) is not reviewed. Check only that each module is calculated and linked the way the
-workbook's own labels and structure say it is. Do not raise methodology questions.

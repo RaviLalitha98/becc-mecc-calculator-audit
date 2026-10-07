@@ -28,7 +28,6 @@ the impact, a suggested fix, and a severity (Critical / High / Medium / Low).
 choice), a findings register (Excel + Markdown), and an evidence folder with the raw scan results. The original workbook is never modified.
 
 **What it doesn't do:** it doesn't review the methodology or verify the emission-factor data.
-Those are outside its scope, and it doesn't raise questions about them.
 
 ## Repository layout
 

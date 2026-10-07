@@ -103,8 +103,7 @@
 
 [What could not be verified; assumptions; evidence folder contents; how to reproduce; original file hash unchanged at end]
 
-**Outside the scope of this evaluation.** Methodology and emission-factor data are not
-reviewed. On the Excel side, the following were not fully covered. Keep every item; say which
+**Not fully covered in this evaluation.** Keep every item; say which
 ones apply to this workbook (e.g. "no VBA present") and add anything else not reviewed.
 
 - **Live Excel behaviour:** the review reads formulas and the values Excel last saved; scenario

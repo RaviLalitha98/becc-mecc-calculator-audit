@@ -20,20 +20,15 @@ Two habits make or break this kind of audit:
 2. **Separate kinds of problem.** A spreadsheet defect (wrong cell referenced) and a
    maintainability risk (fixed `SUM(H10:H150)`) need different owners and different fixes.
    Mixing them makes the report unusable.
-3. **Methodology is out of scope.** The audit checks whether the workbook calculates what it
-   sets out to calculate — judged against its own labels, headers, units, notes and
-   consistency — not whether the carbon-accounting approach or the emission-factor data are
-   right. Do not review, question or comment on methodology (system boundary, Module D,
-   biogenic carbon, wastage rates, transport assumptions, factor sources and so on), do not
-   ask the user methodology questions, and do not raise them as findings.
-   This does **not** exempt unit and conversion errors: a factor declared per m³ multiplied
-   by a quantity in kg, a transport formula treating that same quantity as kg, a kg↔t
-   conversion applied twice, or one label used for two different formulas are calculation
-   errors — the workbook contradicts itself — and must be reported in full. The test: if
-   the finding needs an outside standard to judge, skip it; if the workbook's own units,
-   labels or other rows show it is wrong, report it. A hard-coded conversion constant
-   (e.g. a density) is reported as a maintainability/unit risk; whether its value is right
-   is not judged.
+3. **Calculation integrity, judged on the workbook's own terms.** The audit checks whether the
+   workbook calculates what it sets out to calculate — against its own labels, headers, units,
+   notes and internal consistency. Methodology and emission-factor data are outside its scope.
+   Unit and conversion errors are calculation errors and are always reported: a factor declared
+   per m³ multiplied by a quantity in kg, a transport formula treating that same quantity as kg,
+   a kg↔t conversion applied twice, one label used for two different formulas. The test: if a
+   point needs an outside standard to judge, leave it; if the workbook's own units, labels or
+   other rows show it is wrong, report it. A hard-coded conversion constant (e.g. a density) is
+   a maintainability/unit risk; its value is not judged.
 
 ## Ground rules
 
