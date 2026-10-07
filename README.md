@@ -24,8 +24,8 @@ workbook. It finds problems like these:
 Every issue comes with evidence: the sheet and cell, the current formula, why it's wrong,
 the impact, a suggested fix, and a severity (Critical / High / Medium / Low).
 
-**What you get:** a findings register (Excel + Markdown), an evaluation report, and an evidence
-folder with the raw scan results. The original workbook is never modified.
+**What you get:** an evaluation report (shown in the chat, or as a Word or PDF file, your
+choice), a findings register (Excel + Markdown), and an evidence folder with the raw scan results. The original workbook is never modified.
 
 **What it doesn't do:** it doesn't confirm that the emission factors or the methodology are
 right. Those are flagged for the methodology owner to confirm.
@@ -130,7 +130,8 @@ To check it's installed, type `/` and look for `becc-mecc-calculator-audit` in t
 ### 4. Run the scripts without Claude
 
 Requirements: Python 3.9+ and `openpyxl`. Optional: `msoffcrypto-tool` for password-to-open
-workbooks, and LibreOffice (with UNO) for `recalc.py` scenario testing.
+workbooks, LibreOffice (with UNO) for `recalc.py` scenario testing, and `python-docx`,
+`markdown` and `xhtml2pdf` for exporting the report to Word or PDF.
 
 ```bash
 pip install openpyxl msoffcrypto-tool
@@ -141,6 +142,12 @@ python skills/becc-mecc-calculator-audit/scripts/run_all.py input/WORKBOOK.xlsx 
 Add `--previous input/OLD_VERSION.xlsx` to compare against an earlier version. The scripts read
 the workbook only and never modify it. Their output is *candidate* evidence: each item still has
 to be traced and confirmed before it becomes a finding (see `SKILL.md`).
+
+To turn a finished Markdown report into Word and/or PDF:
+```bash
+pip install python-docx markdown xhtml2pdf
+python skills/becc-mecc-calculator-audit/scripts/export_report.py audit_report.md --format docx pdf
+```
 
 ## Editing the skill
 

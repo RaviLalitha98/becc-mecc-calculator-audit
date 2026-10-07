@@ -1,11 +1,11 @@
 # [Calculator name] — Technical Audit and Evaluation Report
 
-**Workbook(s) reviewed:** [file name(s), version, SHA-256 at intake]
-**Compared against:** [previous version / twin sheets / none]
-**Methodology reference:** [document + version, or "not provided — methodology verification requires confirmation"]
-**Supported Excel versions (stated):** [list, or "not documented — to confirm"]
-**Review date / reviewer:** [ ]
-**Scope and limits:** [what was and was not reviewed: protected/encrypted parts, VBA, Power Query, Excel vs LibreOffice recalculation, inputs used]
+- **Workbook(s) reviewed:** [file name(s), version, SHA-256 at intake]
+- **Compared against:** [previous version / twin sheets / none]
+- **Methodology reference:** [document + version, or "not provided — methodology verification requires confirmation"]
+- **Supported Excel versions (stated):** [list, or "not documented — to confirm"]
+- **Review date / reviewer:** [ ]
+- **Scope and limits:** [what was and was not reviewed: protected/encrypted parts, VBA, Power Query, Excel vs LibreOffice recalculation, inputs used]
 
 ---
 

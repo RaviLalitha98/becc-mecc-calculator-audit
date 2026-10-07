@@ -54,6 +54,7 @@ Run from that directory or with full paths. All write Markdown summaries plus CS
 | `compare_versions.py OLD NEW` | Layout-aligned diff: formula/reference/function changes, formulas overwritten by values, data (EF) changes, names, settings; also twin-sheet comparison within one workbook via `--pair` |
 | `recalc.py --scenarios S.json --workbook V1 [--workbook V2]` | Recalculate copies with test inputs in headless LibreOffice, check expectations, reconcile versions, check entries against data-validation rules |
 | `findings_register.py findings.json --out DIR` | Validate findings and build the register (xlsx + md) and severity counts |
+| `export_report.py REPORT.md --format docx pdf` | Convert the Markdown report to Word and/or PDF (A4 landscape; needs `python-docx` / `markdown` + `xhtml2pdf`) |
 | `dump_cells.py` | Every cell to CSV for ad-hoc pandas/grep work |
 
 ## Workflow
@@ -160,7 +161,8 @@ compare implementation against it; where not, list questions for the methodology
 Read `references/severity-confidence-findings.md`. Record findings in `findings.json`
 (schema in that file) and run `python scripts/findings_register.py findings.json --out audit_out`
 to validate fields and produce the register and counts. Then write the report from
-`assets/report_template.md`.
+`assets/report_template.md` as `audit_report.md`, and deliver it in the format(s) the user
+chose (see Deliverables).
 
 Before finalising, re-verify every Critical and High finding by re-opening the cells in the
 original file (not your notes) — or, when subagents are available, give the finding list and
@@ -189,7 +191,16 @@ from what the cell feeds. Full definitions and examples: `references/severity-co
    table, formula consistency, cell linkage, life-cycle modules, materials, units, version
    robustness, compatibility matrix and conclusion, methodology questions, recommended
    corrections with current/proposed formula and reason, test results, limitations).
-   Deliver it in the host's document format when one exists; otherwise Markdown/Word.
+   Always write it first as Markdown (`audit_report.md`), then deliver it in the format the
+   user wants. If they have not said, ask once, before writing the report, offering:
+   - **In the chat**: show the report as Markdown directly in the conversation (good for a
+     quick read; long reports may be summarised in chat with the full file attached).
+   - **Word (.docx)**: editable, for comments and tracked changes.
+   - **PDF**: fixed layout, for sharing and sign-off.
+   They can pick more than one. Produce Word/PDF with
+   `python scripts/export_report.py audit_report.md --format docx pdf --out DIR`; if the host
+   has its own Word or PDF skill, that may be used instead. Open or render the result and
+   check the tables are readable before handing it over.
 2. **Findings register** (`findings_register.xlsx`) — one row per finding, filterable.
 3. **Evidence folder** — the `audit_out` outputs, scenario JSON and recalculation results,
    so another reviewer can reproduce every finding.
