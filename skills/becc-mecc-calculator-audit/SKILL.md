@@ -163,11 +163,7 @@ wrong units, blank selections) are blocked or silently produce zeros. Review hid
 rows/columns/sheets, names, helper cells, macros, queries and protection effects on
 auditability.
 
-### Phase 13 — (not performed) Methodology
-Methodology and emission-factor data are out of scope (see principle 3). Skip this phase;
-do not list methodology questions.
-
-### Phase 14 — Findings, verification and report
+### Phase 13 — Findings, verification and report
 Read `references/severity-confidence-findings.md`. Record findings in `findings.json`
 (schema in that file) and run `python scripts/findings_register.py findings.json --out audit_out`
 to validate fields and produce the register and counts. Then write the report from
